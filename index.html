@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+</head>
+<body> 
+
+<h2>Login</h2>
+<form id="loginForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <button type="button" onclick="submitForm()">Login</button>
+</form>
+
+<script>
+    function submitForm() {
+        // Get form data
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        // Create an object with the form data
+        var formData = {
+            "username": username,
+            "password": password
+        };
+
+        // Make a POST request to the login API endpoint
+        fetch('http://127.0.0.1:8000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Handle the response, e.g., redirect or display a success message
+        })
+    }
+</script>
+
+</body>
+</html>
